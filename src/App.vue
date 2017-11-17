@@ -4,8 +4,8 @@
       <contacts></contacts>
     </div>
     <div class="rightBox">
-      <!--<detail></detail>-->
-      <infoEdit></infoEdit>
+      <detail v-show="!editShow"></detail>
+      <infoEdit v-show="editShow"></infoEdit>
     </div>
     <router-view/>
   </div>
@@ -17,6 +17,11 @@ import detail from '@/components/detail/detail'
 import infoEdit from '@/components/infoEdit/infoEdit'
 
 export default {
+  data: function() {
+    return {
+      editShow :false
+    }
+  },
   components: {
     "contacts": contacts,
     "detail": detail,

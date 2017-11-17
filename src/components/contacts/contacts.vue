@@ -3,7 +3,7 @@
         <div class="headerBox">
             <div class="header clearfix">
                 <h2 class="title">联系人</h2>
-                <span class="addIcon"></span>
+                <span class="addIcon" @click="editShow()"></span>
             </div>
             <div class="searchBox">
                 <div class="search">
@@ -26,7 +26,21 @@
 </template>
 
 <script>
-export default {}
+export default {
+    props: {
+        editShow:false
+    },
+    data: function() {
+        return {
+            editShow:false
+        }
+    },
+    methods: {
+        editShow: function() {
+            this.editShow = true;
+        }
+    }
+}
 </script>
 
 <style scoped>
