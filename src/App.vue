@@ -4,30 +4,20 @@
       <contacts></contacts>
     </div>
     <div class="rightBox">
-      <detail v-show="!editShow"></detail>
-      <infoEdit v-show="editShow"></infoEdit>
+      <router-view/>
     </div>
-    <router-view/>
   </div>
 </template>
 
 <script>
-import contacts from '@/components/contacts/contacts'
-import detail from '@/components/detail/detail'
-import infoEdit from '@/components/infoEdit/infoEdit'
+import contacts from '@/components/contacts/contacts';
+import '@/assets/reset.css';
 
 export default {
-  data: function() {
-    return {
-      editShow :false
-    }
-  },
   components: {
-    "contacts": contacts,
-    "detail": detail,
-    "infoEdit": infoEdit
+    'contacts': contacts
   }
-}
+};
 </script>
 
 <style>

@@ -61,39 +61,50 @@ export default {
   },
   data: function () {
     return {
-      msg: {},
-      index: ''
-    };
-  },
-  created: function () {
-    var id = parseInt(this.$route.params.id);
-    var personList = JSON.parse(localStorage.fetchList);
-    for (var i = 0; i < personList.length; i++) {
-      if (personList[i].id === id) {
-        this.msg = personList[i];
-        this.index = i;
-        break;
+      msg: {
+        id: '',
+        name: '',
+        tel: '',
+        email: '',
+        address: '',
+        job: '',
+        remarks: ''
       }
-    }
+    };
   },
   methods: {
     // 保存信息
     saveMsg: function () {
-      var personList = JSON.parse(localStorage.fetchList);
+      var personList = [];
+      var msg = {};
+      if (localStorage.fetchList) {
+        personList = JSON.parse(localStorage.fetchList);
+        msg.id = personList[personList.length - 1].id + 1;
+      } else {
+        msg.id = 1;
+      }
       if (!this.msg.name) {
         alert('请输入联系人姓名！');
         return;
+      } else {
+        msg.name = this.msg.name;
       }
       if (!this.msg.tel) {
         alert('请输入电话号码！');
         return;
+      } else {
+        msg.tel = this.msg.tel;
       }
-      personList[this.index] = this.msg;
+      msg.email = this.msg.email;
+      msg.address = this.msg.address;
+      msg.job = this.msg.job;
+      msg.remarks = this.msg.remarks;
+      personList.push(msg);
       localStorage.fetchList = JSON.stringify(personList);
       // 组件间通信
       bus.$emit('personInfo');
       // 返回联系人详情
-      this.$router.push({path: '/detail/' + this.$route.params.id});
+      this.$router.push({path: '/detail/' + msg.id});
     },
     // 取消操作
     close: function () {
